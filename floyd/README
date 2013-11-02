@@ -1,0 +1,10 @@
+this is assignment 2
+
+the program is divided as serial version and parallel version
+to run serial version, go to graph.c comment out #define PARAL_MODE
+make sure the #define SERIAL_MODE is uncomment, then make floyd-serial
+./floyd-serial input_file.dat output_file.dat, result is stored 
+in .dat file
+
+to run parallel version, go to graph.c comment out #define SERIAL_MODE
+make sure the #define SERIAL_MODE is uncomment, then make floyd-parallel
