@@ -27,6 +27,8 @@ int main(int argc, char *argv[])
 	int global_i=0;	/* matrix row index for checkerboard gather function */
 	int global_j=0;	/* matrix col index for checkerboard gather function */
 	int offset = 0;	/* offset to transfer checkerboard to the correct order */
+	double t1, t2;
+
 	char *file[] = {"matrixA.dat", "matrixB.dat", "matrixC_mpi.res"};
 
 	MPI_Init(&argc, &argv);
@@ -98,6 +100,7 @@ int main(int argc, char *argv[])
 
 	printf("rank: %d, coords[0]: %d, coords[1]: %d\n", rank, coords[0], coords[1]);
 
+	t1 = MPI_Wtime();
 	/* alignment */
 	// up shift 
 	direction = 0;
@@ -114,8 +117,6 @@ int main(int argc, char *argv[])
 			source, 0, comm2D, &status);
 
 	MPI_Barrier(comm2D);
-
-	printf("\n");
 
 	for (k = 0; k < msize; k++){
 
@@ -144,7 +145,11 @@ int main(int argc, char *argv[])
 	}	
 
 	MPI_Allgather(Cbuff, chunk_size, MPI_DOUBLE, Cstorage, chunk_size, MPI_DOUBLE, comm2D);
-
+	
+	t2 = MPI_Wtime();
+	printf("process %d, measured results: %f second\n", rank, t2-t1);fflush(out);
+	
+	// rearrange the matrix C in a proper order
 	if (rank == root){
 		for (i = 0; i < size; i++){
 			for (j = 0; j < row*col; j++){
