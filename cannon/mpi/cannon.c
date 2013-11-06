@@ -147,7 +147,7 @@ int main(int argc, char *argv[])
 	MPI_Allgather(Cbuff, chunk_size, MPI_DOUBLE, Cstorage, chunk_size, MPI_DOUBLE, comm2D);
 	
 	t2 = MPI_Wtime();
-	printf("process %d, measured results: %f second\n", rank, t2-t1);fflush(out);
+	printf("process %d, measured results: %f second\n", rank, t2-t1);fflush(stdout);
 	
 	// rearrange the matrix C in a proper order
 	if (rank == root){
