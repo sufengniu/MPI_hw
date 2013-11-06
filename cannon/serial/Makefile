@@ -19,4 +19,4 @@ matrix_multi.o: matrix_multi.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -rf *.o matrix_gen matrix_multi *.res
+	rm -rf *.o *~ matrix_gen matrix_multi *.res *.dat

@@ -3,8 +3,8 @@
 
 #include "mpi.h"
 
-int pread_matrix(char *file_name, int *n, double ***A, MPI_Comm comm);
+int pread_matrix(char *file_name, int *n, int *srow, int *scol, int msize, double ***A, double **Astorage, MPI_Comm comm);
 
-int pfprintf_matrix(char *file_name, int n, double **A, int chunk_size, MPI_Comm comm);
+int fprintf_matrix(char *file_name, int n, double *Cstorage);
 
 #endif

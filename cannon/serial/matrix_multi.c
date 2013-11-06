@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 	matrix_load(file[0], &n, &A);
 	matrix_load(file[1], &n, &B);
 	printf("matrix loading done\n");
-	
+
 	C = (double **)malloc(n * sizeof(void *));
 	for (i = 0; i < n; i++){
 		if ((*(C+i) = (double *)calloc(n, sizeof(double))) == NULL){
@@ -50,7 +50,15 @@ int main(int argc, char *argv[])
 	printf("print result to file %s...\n", file[2]);
 	matrix_print(file[2], n, C);
 	printf("file printf done.\n");	
-	
+
+/*
+	for (i = 0; i < n; i++){
+		for (j = 0; j < n; j++){
+			printf("%6.3f ", C[i][j]);
+		}
+		putchar('\n');
+	}
+*/	
 	for (i = 0; i < n; i++){
 		free(A[i]);
 		free(B[i]);
@@ -78,6 +86,12 @@ void matrix_load(char *file_name, int *n, double ***A)
 	}
 
 	rewind(pFile);
+
+	result = fread(n, sizeof(int), 1, pFile);
+	if (result != 1){
+		fputs("Memory error\n", stderr);
+		exit(2);
+	}
 
 	result = fread(n, sizeof(int), 1, pFile);
 	if (result != 1){
