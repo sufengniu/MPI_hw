@@ -1,0 +1,28 @@
+#!/bin/bash 
+
+#PBS -N assignment3
+#PBS -l select=4:ncpus=8:mem=6gb:interconnect=10g,walltime=10:00:00
+#PBS -j oe       
+
+source /etc/profile.d/modules.sh
+module purge
+module add gcc/4.8.1 openmpi/1.6.4 
+
+#NCORES=`qstat -xf $PBS_JOBID | grep List.ncpus | sed 's/^.\{26\}//'`  
+cd $PBS_O_WORKDIR  
+
+for i in 3 4 5; do
+	for j in 1 2 3; do
+		./matrix_gen -n $((i*j*100)) -r 100	# -r define the input range
+
+		cp *.dat ../serial
+
+		mpiexec -n $((i*i)) ./cannon > output_mpi_$((j))_$((i*i)).log
+		rm *.dat
+
+		cd ../serial
+		./matrix_multi > output_serial_$((j))_$((i*i)).log
+		rm *.dat
+		cd ../mpi
+	done
+done

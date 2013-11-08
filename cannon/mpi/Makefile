@@ -31,5 +31,5 @@ matrix_gen.o: matrix_gen.c
 	$(GCC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f *.o *~ $(EXECS) matrix_gen *.dat *.res
+	rm -f *.o *~ $(EXECS) matrix_gen *.dat *.res assignment*
 

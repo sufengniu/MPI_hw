@@ -25,7 +25,8 @@ int main(int argc, char *argv[])
 	matrix_load(file[0], &n, &A);
 	matrix_load(file[1], &n, &B);
 	printf("matrix loading done\n");
-
+	
+	printf("matrix size is %d by %d\n", n, n);
 	C = (double **)malloc(n * sizeof(void *));
 	for (i = 0; i < n; i++){
 		if ((*(C+i) = (double *)calloc(n, sizeof(double))) == NULL){
