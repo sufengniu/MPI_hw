@@ -101,7 +101,14 @@ int main(int argc, char **argv)
 		free(A[i]);
 	}
 	free(A);
-
+	
+	for (i = 0; i < chunk_size; i++)
+	{
+		free(B[i]);
+	}
+	free(B);
+	free(tmp);
+	
 	MPI_Finalize();
 	
 	return 0;
