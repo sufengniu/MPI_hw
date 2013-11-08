@@ -1,0 +1,9 @@
+this is cannon's algorithm for matrix-matrix multiplication
+
+make sure the matrix is square, also boundary condition is not considered in this implementation
+it will be considered in the later released version
+
+matrix_gen is used to generate random matrix, ex: ./matrix_gen -n 50 -r 10 to generate 50 by 50 
+matrix with the number range between 0 to 10
+
+
